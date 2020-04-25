@@ -60,6 +60,7 @@ public class SimpleFileHandler {
         this.documentRoot = documentRoot;
         this.filePath = filePath;
         if (this.filePath.equals("/")) this.filePath += INDEX;
+        if (this.filePath.equals("")) this.filePath = this.filePath + "/" + INDEX;
         try {
             this.file = new File(Main.documentRoot, this.filePath);
             this.byteArray = Files.readAllBytes(Paths.get(this.documentRoot, this.filePath));

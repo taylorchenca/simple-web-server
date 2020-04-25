@@ -45,10 +45,22 @@ public class SimpleHttpResponseHeader {
 
     private void statusCodeToDescription() {
         switch (this.statusCode) {
-            case 200: this.description = "OK";
-            case 400: this.description = "Bad Request";
-            case 403: this.description = "Forbidden";
-            case 404: this.description = "Not Found";
+            case 200: {
+                this.description = "OK";
+                break;
+            }
+            case 400: {
+                this.description = "Bad Request";
+                break;
+            }
+            case 403: {
+                this.description = "Forbidden";
+                break;
+            }
+            case 404: {
+                this.description = "Not Found";
+                break;
+            }
             default: this.description = "Unknown";
         }
     }

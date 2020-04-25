@@ -4,6 +4,15 @@ public class SimpleHttpRequest {
     private String method;
     private String endPoint = "";
     private String httpVersion;
+    private boolean valid = true;
+
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
 
     public String getMethod() {
         return method;
@@ -35,16 +44,17 @@ public class SimpleHttpRequest {
         this.httpVersion = httpVersion;
     }
 
-    public SimpleHttpRequest(String request) throws Exception {
+    public SimpleHttpRequest(String request) {
         StringTokenizer tokenizer = new StringTokenizer(request);
         this.method = tokenizer.nextToken();
         if (!method.equals("GET")) {
-            throw new Exception("Invalid method");
+            valid = false;
+            return;
         }
         this.endPoint = tokenizer.nextToken();
         this.httpVersion = tokenizer.nextToken();
         if (!httpVersion.equals("HTTP/1.0") && !httpVersion.equals("HTTP/1.1")) {
-            throw new Exception("Invalid http version");
+            valid = false;
         }
     }
 }

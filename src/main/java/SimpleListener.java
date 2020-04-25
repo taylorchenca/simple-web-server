@@ -14,16 +14,17 @@ public class SimpleListener {
         while (true) {
 //            serverSocket.setSoTimeout(60000);
 //            SimpleWebServer simpleWebServer = new SimpleWebServer(serverSocket.accept());
+
             Socket socket = serverSocket.accept();
-            socket.setKeepAlive(true);
+//            socket.setKeepAlive(true);
+//            socket.setSoTimeout(5000);
 //            socket.setSoTimeout(50000);
 //            socket.setTcpNoDelay(true);
             SimpleWebServer simpleWebServer = new SimpleWebServer(socket);
 
-            System.out.println("Connecton opened. (" + new Date() + ")");
-
+            System.out.println("Connection opened. (" + new Date() + ")");
             Thread thread = new Thread(simpleWebServer);
-            System.out.println("Thread " + thread.toString() + " created");
+            System.out.println(thread.toString() + " created");
             thread.start();
         }
     }
