@@ -9,6 +9,10 @@ public class SimpleHttpResponseHeader {
     private Date date;
     private String server;
 
+    public int getStatusCode() {
+        return statusCode;
+    }
+
     public SimpleHttpResponseHeader() {
     }
 

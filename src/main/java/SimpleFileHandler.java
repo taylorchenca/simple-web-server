@@ -1,10 +1,9 @@
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.*;
-import java.nio.file.AccessDeniedException;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Paths;
+import java.nio.file.*;
+import java.nio.file.attribute.PosixFilePermission;
+import java.util.Set;
 
 public class SimpleFileHandler {
     private final String INDEX = "index.html";
@@ -63,15 +62,15 @@ public class SimpleFileHandler {
         if (this.filePath.equals("")) this.filePath = this.filePath + "/" + INDEX;
         try {
             this.file = new File(Main.documentRoot, this.filePath);
+            if (!fileAccessible()) {
+                this.fileStatus = FileStatus.Status.DENIED;
+                this.contentType = "text/plain";
+                this.length = 0;
+                return;
+            }
             this.byteArray = Files.readAllBytes(Paths.get(this.documentRoot, this.filePath));
         } catch (NoSuchFileException e) {
             this.fileStatus = FileStatus.Status.NOT_FOUND;
-            this.contentType = "text/plain";
-            this.length = 0;
-            System.out.println(e);
-            return;
-        } catch (AccessDeniedException e) {
-            this.fileStatus = FileStatus.Status.DENIED;
             this.contentType = "text/plain";
             this.length = 0;
             System.out.println(e);
@@ -80,6 +79,11 @@ public class SimpleFileHandler {
         this.contentType = extensionToContentType(FilenameUtils.getExtension(this.filePath));
         this.length = (int) file.length();
         this.fileStatus = FileStatus.Status.SUCCESS;
+    }
+
+    private boolean fileAccessible() throws IOException {
+        Set<PosixFilePermission> permissions = Files.getPosixFilePermissions(this.file.toPath());
+        return permissions.contains(PosixFilePermission.valueOf("OTHERS_READ"));
     }
 
     private String extensionToContentType(String ext) {

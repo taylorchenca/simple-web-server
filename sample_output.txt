@@ -1,0 +1,41 @@
+Below is the results of requesting
+GET /simple.html HTTP/1.1
+
+GET /badaccess.html HTTP/1.1
+
+GET /non_existent.html HTTP/1.1
+
+BAD_METHOD / HTTP/1.1
+
+
+HTTP/1.1 200 OK
+Server: Simple server
+Date: Sat Apr 25 21:58:15 PDT 2020
+Content-type: text/html
+Content-length: 87
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Simple HTML</h1>
+<p>Simple HTML</p>
+
+</body>
+</html>HTTP/1.1 403 Forbidden
+Server: Simple server
+Date: Sat Apr 25 21:58:15 PDT 2020
+Content-type: text/plain
+Content-length: 0
+
+HTTP/1.1 404 Not Found
+Server: Simple server
+Date: Sat Apr 25 21:58:15 PDT 2020
+Content-type: text/plain
+Content-length: 0
+
+HTTP/1.1 400 Bad Request
+Server: Simple server
+Date: Sat Apr 25 21:58:15 PDT 2020
+Content-type: text/html
+Content-length: 0

@@ -48,13 +48,13 @@ public class SimpleHttpRequest {
         StringTokenizer tokenizer = new StringTokenizer(request);
         this.method = tokenizer.nextToken();
         if (!method.equals("GET")) {
-            valid = false;
+            this.valid = false;
             return;
         }
         this.endPoint = tokenizer.nextToken();
         this.httpVersion = tokenizer.nextToken();
         if (!httpVersion.equals("HTTP/1.0") && !httpVersion.equals("HTTP/1.1")) {
-            valid = false;
+            this.valid = false;
         }
     }
 }

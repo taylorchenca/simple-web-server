@@ -1,0 +1,8 @@
+GET /simple.html HTTP/1.1
+
+GET /badaccess.html HTTP/1.1
+
+GET /non_existent.html HTTP/1.1
+
+BAD_METHOD / HTTP/1.1
+

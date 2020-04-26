@@ -34,16 +34,18 @@ public class SimpleWebServer implements Runnable {
                         .contentType(fileHandler.getContentType())
                         .contentLength(fileHandler.getLength());
 
-                if (!httpRequest.isValid()) header.statusCode(400);
-                else if (fileHandler.getFileStatus() == FileStatus.Status.NOT_FOUND)
-                    header.statusCode(404);//TODO: implement and test 404 case
+                if (!httpRequest.isValid()) {
+                    header.statusCode(400).contentType("text/plain")
+                    .contentLength(0);
+                } else if (fileHandler.getFileStatus() == FileStatus.Status.NOT_FOUND)
+                    header.statusCode(404);
                 else if (fileHandler.getFileStatus() == FileStatus.Status.DENIED)
                     header.statusCode(403);
 
                 printWriter.print(header);
                 printWriter.flush();
 
-                if (fileHandler.getFileStatus() == FileStatus.Status.SUCCESS) {
+                if (header.getStatusCode() == 200 && fileHandler.getFileStatus() == FileStatus.Status.SUCCESS) {
                     bufferedOutputStream.write(fileHandler.getByteArray(), 0, fileHandler.getLength());
                     bufferedOutputStream.flush();
                     System.out.println("File " + httpRequest.getEndPoint() + " of type " + fileHandler.getContentType() + " returned");
@@ -57,10 +59,10 @@ public class SimpleWebServer implements Runnable {
                 printWriter.close();
                 bufferedOutputStream.close();
                 socket.close();
+                SimpleListener.activeConnections--;
             } catch (Exception e) {
                 System.err.println("Error closing stream : " + e.getMessage());
             }
-//            System.out.println("Connection closed.\n");
         }
     }
 }
