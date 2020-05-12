@@ -39,11 +39,11 @@ Java
 Maven 
 
 ## How to run 
-Compile 
+### Compile 
 cd to the COEN317Project1 folder, execute the following command to create the executable jar.  
 mvn clean compile assembly:single
 
-Run 
+### Run 
 java -jar ./target/COEN317Project1-1.0-SNAPSHOT-jar-with-dependencies.jar -document_root "/xxx/xxx" -port xxx 
 
 Now you will be able to request from the web server from either a web browser or a command line program. 
