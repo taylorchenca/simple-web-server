@@ -1,8 +1,4 @@
-Student Name: Haoyao Chen
-Assignment Name: Programming Assignment 1 - Web Server
-Date: Sun Apr 26, 2020
-
-High-level description:
+##High-level description
 This assignment requires students to build a simple web server that can serve GET requests.
 My program accepts incoming client connections, parses the client's request, and serves the requested files with appropriate headers.
 The program uses a multi-threaded approach. One thread is created for each connection.
@@ -19,7 +15,8 @@ The timeout is determined by (default timeout / # active connections).
 In this case, default timeout is set to 5000ms. Therefore, when there is only 1 active connection, that connection is set to timeout in 5000ms. When there are 2 active connections, the incoming connection would be set to timeout in 2500ms, and so on.  
 A client can take advantage of this feature to make multiple requests using the same connection. This would be especially useful in the case where a request to a web page results in multiple subsequent requests for assets such as css or images.  
 In the duration that a socket is kept open, it waits for the client's each request and responds to those requests.
-Submitted files:
+
+##File description
 ./src/main/java
     Main.java - entry point for the program
     SimpleListener.java - contains a forever loop that listens for incoming connection requests
@@ -38,11 +35,11 @@ test_endpoint - folder containing test web resources
 Screenshots - contains images of accessing the web server from a web browser
 
 
-System requirements:
+##System requirements
 Java  
 Maven 
 
-How to run:
+##How to run
 Compile
 cd to the COEN317Project1 folder, execute the following command to create the executable jar.  
 mvn clean compile assembly:single
@@ -53,9 +50,9 @@ xxx
 
 Now you will be able to request from the web server from either a web browser or a command line program. 
 
-How to run test script:
-#Build and start server
+##How to run test script
+###Build and start server
 ./start_server.sh 
 
-#Start client and supply requests
+###Start client and supply requests
 cat test_requests.txt | ./start_client.sh
