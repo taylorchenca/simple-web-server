@@ -1,3 +1,6 @@
+# Simple Web Server  
+A simple web server implemented with Java's HTTP and IO libraries.  
+
 ## High-level description 
 This assignment requires students to build a simple web server that can serve GET requests.  
 My program accepts incoming client connections, parses the client's request, and serves the requested files with appropriate headers.  
